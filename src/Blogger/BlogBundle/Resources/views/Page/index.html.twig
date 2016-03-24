@@ -1,6 +1,6 @@
 {% extends 'BloggerBlogBundle::layout.html.twig' %}
-{#{% extends '::base.html.twig' %}
-#}
+
+{% block title %}HackinLumberjack{% endblock%}
 
 {% block body %}
     {% for blog in blogs %}
@@ -24,6 +24,6 @@
             </footer>
         </article>
     {% else %}
-        <p>There are no blog entries for HackinLumberjack</p>
+        <p class="text-center">There are no blog entries for HackinLumberjack</p>
     {% endfor %}
 {% endblock %}

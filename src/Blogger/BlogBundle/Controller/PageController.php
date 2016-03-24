@@ -31,4 +31,14 @@ class PageController extends Controller
     {
         return $this->render('BloggerBlogBundle:Page:contact.html.twig');
     }
+
+    public function signinAction()
+    {
+        return $this->render('BloggerBlogBundle:Page:signIn.html.twig');
+    }
+
+    public function createblogAction()
+    {
+        return $this->render('BloggerBlogBundle:Page:createBlog.html.twig');
+    }
 }
