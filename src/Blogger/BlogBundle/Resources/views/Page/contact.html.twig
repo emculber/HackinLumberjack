@@ -7,7 +7,9 @@
         <h1>Contact Hackin Lumberjack</h1>
     </header>
 
-    {% for flash_message in app.session.flashbag.get('notice') %}
+    <p>Want to contact Lumberjack?</p>
+    <p>Well sorry this is not implemented yet but hopefully soon?</p>
+    {#{% for flash_message in app.session.flashbag.get('notice') %}
         <div class="flash-notice">
             {{ flash_message }}
         </div>
@@ -27,5 +29,5 @@
 
         <input type="submit" value="Submit" />
 
-        {{ form_end(form) }}
+        {{ form_end(form) }}#}
 {% endblock %}

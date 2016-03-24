@@ -35,21 +35,6 @@ class Blog
     protected $blog;
 
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    protected $image;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $tags;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
-     */
-    protected $comments;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     protected $created;
@@ -61,8 +46,6 @@ class Blog
 
     public function __construct()
     {
-        $this->comments = new ArrayCollection();
-
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
     }
@@ -166,54 +149,6 @@ class Blog
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Blog
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     *
-     * @return Blog
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
      * Set created
      *
      * @param \DateTime $created
@@ -259,39 +194,5 @@ class Blog
     public function getUpdated()
     {
         return $this->updated;
-    }
-
-    /**
-     * Add comment
-     *
-     * @param \Blogger\BlogBundle\Entity\Comment $comment
-     *
-     * @return Blog
-     */
-    public function addComment(\Blogger\BlogBundle\Entity\Comment $comment)
-    {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \Blogger\BlogBundle\Entity\Comment $comment
-     */
-    public function removeComment(\Blogger\BlogBundle\Entity\Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
     }
 }
