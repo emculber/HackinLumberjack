@@ -4,7 +4,6 @@ namespace Blogger\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Enquiry;
-use Blogger\BlogBundle\Form\EnquiryType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller

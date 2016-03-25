@@ -16,11 +16,11 @@ BloggerBlogBundle_contact:
     requirements:
         _method:  GET
 
-BloggerBlogBundle_signin:
-    path:  /signin
-    defaults: { _controller: BloggerBlogBundle:Page:signin }
-    requirements:
-        _method:  GET
+#BloggerBlogBundle_signin:
+#    path:  /login
+#    defaults: { _controller: BloggerBlogBundle:Page:signin }
+#    requirements:
+#        _method:  GET
 
 BloggerBlogBundle_create_blog:
     path:  /createblog
@@ -34,3 +34,9 @@ BloggerBlogBundle_blog_show:
     requirements:
         _method:  GET
         id: \d+
+
+BloggerBlogBundle_update_blog_markdown:
+    path:  /update/blog/markdown
+    defaults: { _controller: BloggerBlogBundle:Blog:createblogupdate }
+    requirements:
+        _method:  POST

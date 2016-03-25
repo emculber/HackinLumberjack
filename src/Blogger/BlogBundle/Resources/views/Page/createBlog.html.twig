@@ -8,4 +8,46 @@
     </header>
 
     <p>Well sorry this is not implemented yet but hopefully soon?</p>
+
+    <div class="form-group">
+  <label for="comment">New Blog:</label>
+  <textarea class="form-control" rows="5" id="new_blog"></textarea>
+</div>
+    <div id="Preview">
+
+    </div>
+
+
 {% endblock %}
+
+
+    {% block page_java_script %}
+           <script>
+            $("#new_blog").keyup(function() {
+
+                console.log($('#new_blog').val());
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('BloggerBlogBundle_update_blog_markdown') }}",
+                    data: {text: $('#new_blog').val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#Preview').html(data.text);
+                    },
+
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                })
+            });
+            {#
+                $.post('{{ path('BloggerBlogBundle_update_blog_markdown') }}',
+                        {text: $('#new_blog').val()},
+                        function (response) {
+                            if (response.code == 100 && response.success) {//dummy check
+                                $('#preview').innerHTML = response.text;
+                            }
+                        }, "json");
+            });
+            #}
+    </script>
+    {% endblock page_java_script %}

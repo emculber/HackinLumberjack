@@ -29,9 +29,11 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "twbs/bootstrap": "~v3.3.6",
         "components/jquery": "~v2.2.1",
-        "symfony/assetic-bundle": "~v2.8.0",
+        "symfony/assetic-bundle": "^2.8",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures" : "dev-master",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "knplabs/knp-markdown-bundle": "~1.4.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
