@@ -9,12 +9,17 @@
 
     <p>Well sorry this is not implemented yet but hopefully soon?</p>
 
-    <div class="form-group">
-  <label for="comment">New Blog:</label>
-  <textarea class="form-control" rows="5" id="new_blog"></textarea>
-</div>
-    <div id="Preview">
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="new_blog">New Blog:</label>
+                <textarea class="form-control" rows="5" id="new_blog"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="preview">Preview:</label>
+            <div id="preview"></div>
+        </div>
     </div>
 
 
@@ -32,7 +37,7 @@
                     data: {text: $('#new_blog').val()},
                     dataType: 'json',
                     success: function (data) {
-                        $('#Preview').html(data.text);
+                        $('#preview').html(data.text);
                     },
 
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
