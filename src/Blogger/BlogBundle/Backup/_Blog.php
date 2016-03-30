@@ -32,6 +32,11 @@ class Blog
     /**
      * @ORM\Column(type="text")
      */
+    protected $raw_blog;
+
+    /**
+     * @ORM\Column(type="text")
+     */
     protected $blog;
 
     /**
@@ -43,6 +48,16 @@ class Blog
      * @ORM\Column(type="datetime")
      */
     protected $updated;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $published;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $published_time;
 
     public function __construct()
     {
