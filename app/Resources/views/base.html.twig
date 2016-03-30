@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/bootstrap.css') }}"/>
         {% endstylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('hackin_icon.png') }}" />
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
 
     <body>
@@ -28,7 +29,7 @@
                             {% if app.user %}
                                 <li><a href="{{ path('BloggerBlogBundle_create_blog') }}">Create Blog</a></li>
                                 <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-                                <li><a href="#">Sign out</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Sign out</a></li>
                             {% else %}
                                 <li><a href="{{ path('fos_user_security_login') }}">Sign in</a></li>
                             {% endif %}
@@ -43,17 +44,20 @@
 
     <div class="container">
         <div class="row">
+            {% block row_size %}
             <div class="col-md-7 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
                 {% block body %}
                 {% endblock body %}
             </div>
+            {% endblock row_size %}
         </div>
     </div>
 
         {% javascripts '@jquery' '@bootstrap_js' %}
     <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
-        {% endjavascripts %}
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    {% endjavascripts %}
 
     {% block page_java_script %}
     {% endblock page_java_script %}

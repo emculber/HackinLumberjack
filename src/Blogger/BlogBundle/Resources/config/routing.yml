@@ -40,3 +40,9 @@ BloggerBlogBundle_update_blog_markdown:
     defaults: { _controller: BloggerBlogBundle:Blog:createblogupdate }
     requirements:
         _method:  POST
+
+BloggerBlogBundle_save_blog:
+    path:  /save/blog
+    defaults: { _controller: BloggerBlogBundle:Blog:saveblog }
+    requirements:
+        _method:  POST

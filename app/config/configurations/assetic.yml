@@ -31,3 +31,7 @@ assetic:
             filters:
                 - 'cssrewrite'
             output: css/bootstrap.css
+        MathJax_js:
+            inputs:
+                - '%kernel.root_dir%/../vender/mathjax/mathjax/MathJax.js'
+            output: js/MathJax.js

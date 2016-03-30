@@ -3,13 +3,12 @@
 namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Blog
  *
  * @ORM\Table(name="blog")
- * @ORM\Entity*
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\BlogRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Blog
@@ -272,6 +271,9 @@ class Blog
      */
     public function setPublished($published)
     {
+        if(!$this->published && $published) {
+            $this->setPublishedTime(new \DateTime());
+        }
         $this->published = $published;
 
         return $this;

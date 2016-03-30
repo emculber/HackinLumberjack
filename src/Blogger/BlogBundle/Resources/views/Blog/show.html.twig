@@ -4,16 +4,19 @@
 
 {% block body %}
     <article class="blog">
+        {% if app.user %}
+            <button class="btn btn-default edit_blog" type="submit">Edit Blog</button>
+        {% endif %}
         <header>
+            <h2>{{ blog.title }}</h2>
             <div class="date">
                 <time datetime="{{ blog.created|date('c') }}">
                     {{ blog.created|date('l, F j, Y') }}
                 </time>
             </div>
-            <h2>{{ blog.title }}</h2>
         </header>
         <div>
-            <p>{{ blog.blog }}</p>
+            {{ blog.blog | raw }}
         </div>
     </article>
 {% endblock body %}

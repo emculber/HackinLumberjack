@@ -2,45 +2,81 @@
 
 {% block title %}Create Blog{% endblock%}
 
-{% block body %}
+{% block row_size %}
+  <div class="col-md-12">
     <header>
-        <h1>Want to Create a Blog post on HackinLumberjack!</h1>
+        <h1>HackinLumberjack Creates the best blogs. So Create one!</h1>
     </header>
 
-    <p>Well sorry this is not implemented yet but hopefully soon?</p>
-
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="new_blog">New Blog:</label>
-                <textarea class="form-control" rows="5" id="new_blog"></textarea>
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New Blog:</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input id="blog_title" type="text" class="form-control" placeholder="Blog Title" aria-describedby="basic-addon1">
+                        <br/>
+                        <textarea class="form-control" rows="25" id="new_blog"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <label for="preview">Preview:</label>
-            <div id="preview"></div>
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Preview:</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="preview"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <p>Options:</p>
+            <div class="checkbox">
+                <label><input id="live_preview" type="checkbox" value="">Live Preview</label>
+                <label><input id="publish_blog" type="checkbox" value="">Publish Blog</label>
+                <button class="btn btn-default save_blog" type="submit">Save Blog</button>
+            </div>
         </div>
     </div>
-
-
+  </div>
 {% endblock %}
-
 
     {% block page_java_script %}
            <script>
             $("#new_blog").keyup(function() {
 
-                console.log($('#new_blog').val());
+                if($('#live_preview').is(':checked')) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('BloggerBlogBundle_update_blog_markdown') }}",
+                        data: {text: $('#new_blog').val()},
+                        dataType: 'json',
+                        success: function (data) {
+                            $('#preview').html(data.text);
+                            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                        },
+
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        }
+                    })
+                }
+            });
+
+            $(".save_blog").click(function() {
                 $.ajax({
                     type: "POST",
-                    url: "{{ path('BloggerBlogBundle_update_blog_markdown') }}",
-                    data: {text: $('#new_blog').val()},
+                    url: "{{ path('BloggerBlogBundle_save_blog') }}",
+                    data: {title: $('#blog_title').val(), text: $('#new_blog').val(), publish: $('#publish_blog').is(':checked')},
                     dataType: 'json',
                     success: function (data) {
-                        $('#preview').html(data.text);
+                        alert("Data was save successful: " + data.success);
                     },
-
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Data was not save successful: " + XMLHttpRequest + textStatus + errorThrown);
                     }
                 })
             });
