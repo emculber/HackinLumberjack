@@ -7,3 +7,11 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+services:
+    blogger.listener.maintenance:
+        class: Blogger\BlogBundle\Listener\MaintenanceListener
+        arguments:
+            container: "@service_container"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

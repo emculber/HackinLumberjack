@@ -14,7 +14,7 @@ class PageController extends Controller
             ->getEntityManager();
 
         $blogs = $em->getRepository('BloggerBlogBundle:Blog')
-            ->getLatestBlogs();
+            ->getPublishedLatestBlogs();
 
         return $this->render('BloggerBlogBundle:Page:index.html.twig', array(
             'blogs' => $blogs
@@ -36,8 +36,5 @@ class PageController extends Controller
         return $this->render('BloggerBlogBundle:Page:signIn.html.twig');
     }
 
-    public function createblogAction()
-    {
-        return $this->render('BloggerBlogBundle:Page:createBlog.html.twig');
-    }
+
 }
