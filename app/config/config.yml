@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@BloggerBlogBundle/Resources/config/services.yml" }
+    - { resource: "@BloggerAdminBundle/Resources/config/services.yml" }
     - { resource: configurations/assetic.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed

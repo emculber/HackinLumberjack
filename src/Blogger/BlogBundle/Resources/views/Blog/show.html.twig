@@ -4,9 +4,6 @@
 
 {% block body %}
     <article class="blog">
-        {% if app.user %}
-            <button class="btn btn-default edit_blog" type="submit">Edit Blog</button>
-        {% endif %}
         <header>
             <h2>{{ blog.title }}</h2>
             <div class="date">
