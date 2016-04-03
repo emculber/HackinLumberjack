@@ -1,0 +1,11 @@
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+{% block title %}Ops 404{% endblock %}
+
+{% block body %}
+    <center>
+    <img src="{{ asset('images/paul_bunyan_2.jpeg') }}" />
+    <header>
+        <h2>{{ error }}</h2>
+    </header>
+    </center>
+{% endblock body %}

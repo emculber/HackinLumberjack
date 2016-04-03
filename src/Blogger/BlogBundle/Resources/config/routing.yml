@@ -1,3 +1,4 @@
+######## PAGES ##########################
 BloggerBlogBundle_homepage:
     path:  /
     defaults: { _controller: BloggerBlogBundle:Page:index }
@@ -28,13 +29,21 @@ BloggerBlogBundle_create_blog:
     requirements:
         _method:  GET
 
+BloggerBlogBundle_admin:
+    path:  /admin
+    defaults: { _controller: BloggerBlogBundle:Page:admin }
+    requirements:
+        _method:  POST
+######## PAGES ##########################
+######## BLOG  ##########################
 BloggerBlogBundle_blog_show:
     path:  /{id}
     defaults: { _controller: BloggerBlogBundle:Blog:show }
     requirements:
         _method:  GET
         id: \d+
-
+######## BLOG  ##########################
+######## ADMIN ##########################
 BloggerBlogBundle_update_blog_markdown:
     path:  /update/blog/markdown
     defaults: { _controller: BloggerBlogBundle:Blog:createblogupdate }
@@ -46,3 +55,4 @@ BloggerBlogBundle_save_blog:
     defaults: { _controller: BloggerBlogBundle:Blog:saveblog }
     requirements:
         _method:  POST
+######## ADMIN ##########################
