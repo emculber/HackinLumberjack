@@ -1,0 +1,51 @@
+{% extends 'BloggerAdminBundle::layout.html.twig' %}
+
+{% block title %}Create Blog{% endblock%}
+
+{% block row_size %}
+    <div class="col-md-12">
+        <header>
+            <h1>HackinLumberjack Creates the best blogs. So Create one!</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">New Blog:</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="25" id="new_blog"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Preview:</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="preview"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p>Options:</p>
+                <button class="btn btn-default save_blog" type="submit">Save Blog</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block page_java_script %}
+        <script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+        <script>
+            $(".save_blog").click(function() {
+                $('script[id="test"]').remove();
+                //$('<script>').attr('src', "test").appendTo('body');
+                var script = $('<script>').attr('id', "test").appendTo('body');
+                script.text($('#new_blog').val());
+            });
+        </script>
+    {% endblock page_java_script %}

@@ -35,4 +35,12 @@ class AdminController extends Controller
             'blog' => $blog
         ));
     }
+
+    /**
+     * @Route("/createscript", name="BloggerAdminBundle_create_script")
+     */
+    public function createscriptAction()
+    {
+        return $this->render('BloggerAdminBundle:Blog:createScript.html.twig');
+    }
 }
