@@ -16,6 +16,6 @@
 /web/bundles/
 .idea
 .idea/*
-web
 web/*
+!web/images/
 composer.lock
