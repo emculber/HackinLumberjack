@@ -17,5 +17,4 @@
 .idea
 .idea/*
 web/*
-!web/images/
 composer.lock
