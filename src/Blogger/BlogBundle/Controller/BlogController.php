@@ -24,13 +24,10 @@ class BlogController extends Controller
         if (!$blog) {
             throw $this->createNotFoundException('Unable to find Blog post.');
         }
-
+        //$isAdmin = $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
         if (!$blog->getPublished()) {
-            return $this->render('BloggerBlogBundle:Page:404.html.twig', array(
-                'error' => '404: Blog post is not published.'
-            ));
+            throw $this->createNotFoundException('Blog post is not published.');
         }
-
 
         return $this->render('BloggerBlogBundle:Blog:show.html.twig', array(
             'blog' => $blog

@@ -36,13 +36,5 @@ class PageController extends Controller
         return $this->render('BloggerBlogBundle:Page:signIn.html.twig');
     }
 
-    public function createblogAction()
-    {
-        return $this->render('BloggerBlogBundle:Page:createBlog.html.twig');
-    }
 
-    public function adminAction()
-    {
-        return $this->render('BloggerBlogBundle:Page:createBlog.html.twig');
-    }
 }

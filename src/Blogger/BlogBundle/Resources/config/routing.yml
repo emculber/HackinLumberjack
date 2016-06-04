@@ -23,17 +23,6 @@ BloggerBlogBundle_contact:
 #    requirements:
 #        _method:  GET
 
-BloggerBlogBundle_create_blog:
-    path:  /createblog
-    defaults: { _controller: BloggerBlogBundle:Page:createblog }
-    requirements:
-        _method:  GET
-
-BloggerBlogBundle_admin:
-    path:  /admin
-    defaults: { _controller: BloggerBlogBundle:Page:admin }
-    requirements:
-        _method:  POST
 ######## PAGES ##########################
 ######## BLOG  ##########################
 BloggerBlogBundle_blog_show:
@@ -43,16 +32,3 @@ BloggerBlogBundle_blog_show:
         _method:  GET
         id: \d+
 ######## BLOG  ##########################
-######## ADMIN ##########################
-BloggerBlogBundle_update_blog_markdown:
-    path:  /update/blog/markdown
-    defaults: { _controller: BloggerBlogBundle:Blog:createblogupdate }
-    requirements:
-        _method:  POST
-
-BloggerBlogBundle_save_blog:
-    path:  /save/blog
-    defaults: { _controller: BloggerBlogBundle:Blog:saveblog }
-    requirements:
-        _method:  POST
-######## ADMIN ##########################

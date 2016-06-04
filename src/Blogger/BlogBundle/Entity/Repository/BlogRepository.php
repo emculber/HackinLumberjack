@@ -30,7 +30,6 @@ class BlogRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('b')
             ->select('b')
-            ->where('b.published = TRUE')
             ->addOrderBy('b.created', 'DESC');
 
         if (false === is_null($limit))
