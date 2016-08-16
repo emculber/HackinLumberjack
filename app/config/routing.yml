@@ -1,3 +1,18 @@
+blogger_finance:
+    resource: "@BloggerFinanceBundle/Controller/"
+    type:     annotation
+    prefix:   /finance
+
+blogger_movie:
+    resource: "@BloggerMovieBundle/Controller/"
+    type:     annotation
+    prefix:   /movie
+
+blogger_user:
+    resource: "@BloggerUserBundle/Controller/"
+    type:     annotation
+    prefix:   /profile
+
 blogger_admin:
     resource: "@BloggerAdminBundle/Controller/"
     type:     annotation

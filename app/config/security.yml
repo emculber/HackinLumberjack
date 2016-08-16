@@ -45,3 +45,4 @@ security:
         - { path: ^/resetting, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_USER }
         - { path: ^/createblog/, role: ROLE_USER }
+        - { path: ^/profile/, role: ROLE_USER }

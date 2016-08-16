@@ -1,0 +1,84 @@
+{% extends 'BloggerFinanceBundle::layout.html.twig' %}
+
+{% block title %}Finance - HackinLumberjack{% endblock%}
+
+{% block body %}
+    <div class="row">
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#newIncome">
+                New Income
+            </button>
+            <button type="button" class="btn btn-default">New Expends</button>
+            <button type="button" class="btn btn-default">New Wallet</button>
+        </div>
+    </div>
+    <div class="row">
+        {% for wallet in wallets %}
+            <div class="col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p id="{{ wallet.Id }}_name">Name: {{ wallet.Name }}</p>
+                        <p id="{{ wallet.Id }}_percent">Percent: {{ wallet.Percent }}</p>
+                        <p id="{{ wallet.Id }}_amount">Amount: {{ wallet.CurrentAmount }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <ul class="list-group incomes">
+            {% for income in incomes %}
+                <li class="list-group-item">{{ income.Date }} - {{ income.Amount }} - {{ income.Note }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- New Income -->
+    <div class="modal fade" id="newIncome" tabindex="-1" role="dialog" aria-labelledby="newIncome">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Income</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(incomeForm) }}
+                    {{ form_widget(incomeForm) }}
+                    {{ form_end(incomeForm) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="New_Income">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_javascript %}
+    <script>
+        $("#New_Income").click(function() {
+            $('#newIncome').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('BloggerFinanceBundle_newincome') }}",
+                    data: {note : $('#form_Note').val(), amount: $('#form_Amount').val(), year: $('#form_Date_year').val(), month: $('#form_Date_month').val(), day: $('#form_Date_day').val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        $('.incomes').prepend('<li class="list-group-item">' + data.Date + ' - ' + data.Amount + ' - ' + data.Note + '</li>');
+                        console.log(data.wallets);
+                        for(var i=0; i < data.wallets.length; i++) {
+                            $('#' + data.wallets[i].Id + "_name").html("Name: " + data.wallets[i].Name);
+                            $('#' + data.wallets[i].Id + "_percent").html("Percent: " + data.wallets[i].Percent);
+                            $('#' + data.wallets[i].Id + "_amount").html("Amount: " + data.wallets[i].CurrentAmount);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Data was not save successful: " + XMLHttpRequest + textStatus + errorThrown);
+                    }
+                })
+            });
+    </script>
+{% endblock %}
