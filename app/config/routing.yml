@@ -1,3 +1,8 @@
+blogger_stock:
+    resource: "@BloggerStockBundle/Controller/"
+    type:     annotation
+    prefix:   /stock
+
 blogger_finance:
     resource: "@BloggerFinanceBundle/Controller/"
     type:     annotation

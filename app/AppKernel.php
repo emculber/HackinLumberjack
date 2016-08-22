@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Blogger\UserBundle\BloggerUserBundle(),
             new Blogger\MovieBundle\BloggerMovieBundle(),
             new Blogger\FinanceBundle\BloggerFinanceBundle(),
+            new Blogger\StockBundle\BloggerStockBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
