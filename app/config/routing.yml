@@ -1,3 +1,8 @@
+blogger_todo:
+    resource: "@BloggerTodoBundle/Controller/"
+    type:     annotation
+    prefix:   /todo
+
 blogger_stock:
     resource: "@BloggerStockBundle/Controller/"
     type:     annotation
