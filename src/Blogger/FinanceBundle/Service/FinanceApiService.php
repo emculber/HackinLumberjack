@@ -4,10 +4,13 @@ namespace Blogger\FinanceBundle\Service;
 
 class FinanceApiService {
 
+    public $baseApi = "http://api.hackinlumberjack.com";
+    public $key = "BpLnfgDsc3WD9F3qNfHK6a95jjJkwzDkh0h3fhfUVuS0jZ9uVbhV4vC6AWX40IVU";
+
     public function getWallets() {
-        $url = 'http://localhost:8080/api/finance/getwallets';
+        $url = $this->baseApi . '/api/finance/getwallets';
         $data = array(
-            'key' => '66IliKuYo5wZNlyXdlsLCWoUBliSWKu8Rms7wbTfmk3yz5Pn3sThrdrx914UivQF'
+            'key' => $this->key
         );
         $options = array(
             'http' => array(
@@ -23,9 +26,9 @@ class FinanceApiService {
     }
 
     public function getIncomes() {
-        $url = 'http://localhost:8080/api/finance/getincomes';
+        $url = $this->baseApi . '/api/finance/getincomes';
         $data = array(
-            'key' => '66IliKuYo5wZNlyXdlsLCWoUBliSWKu8Rms7wbTfmk3yz5Pn3sThrdrx914UivQF'
+            'key' => $this->key
         );
         $options = array(
             'http' => array(
@@ -41,9 +44,9 @@ class FinanceApiService {
     }
 
     public function newIncome($note, $amount, $date) {
-        $url = 'http://localhost:8080/api/finance/newincome';
+        $url = $this->baseApi . '/api/finance/newincome';
         $data = array(
-            'key' => '66IliKuYo5wZNlyXdlsLCWoUBliSWKu8Rms7wbTfmk3yz5Pn3sThrdrx914UivQF',
+            'key' => $this->key,
             'date' => $date,
             'amount' => $amount,
             'wallet_id' => 1,
