@@ -5,11 +5,6 @@ imports:
     - { resource: "@BloggerBlogBundle/Resources/config/services.yml" }
     - { resource: "@BloggerAdminBundle/Resources/config/services.yml" }
     - { resource: configurations/assetic.yml }
-    - { resource: "@BloggerUserBundle/Resources/config/services.yml" }
-    - { resource: "@BloggerMovieBundle/Resources/config/services.yml" }
-    - { resource: "@BloggerFinanceBundle/Resources/config/services.yml" }
-    - { resource: "@BloggerStockBundle/Resources/config/services.yml" }
-    - { resource: "@BloggerTodoBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration

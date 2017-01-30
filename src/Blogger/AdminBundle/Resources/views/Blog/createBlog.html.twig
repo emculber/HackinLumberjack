@@ -2,7 +2,7 @@
 
 {% block title %}Create Blog{% endblock%}
 
-{% block row_size %}
+{% block body %}
   <div class="col-md-12">
     <header>
         <h1>HackinLumberjack Creates the best blogs. So Create one!</h1>
@@ -61,10 +61,10 @@
   </div>
 {% endblock %}
 
-    {% block page_java_script %}
+    {% block page_javascript %}
            <script>
             $("#new_blog").keyup(function() {
-
+                console.log("New Blog Clicked");
                 if($('#live_preview').is(':checked')) {
                     $.ajax({
                         type: "POST",
@@ -83,6 +83,7 @@
             });
 
             $(".save_blog").click(function() {
+                console.log("Save Blog Clicked");
                 $.ajax({
                     type: "POST",
                     url: "{{ path('BloggerAdminBundle_save_blog') }}",
@@ -108,4 +109,4 @@
             });
             #}
     </script>
-    {% endblock page_java_script %}
+    {% endblock page_javascript %}

@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>
-            {% block title %}
-                HakinLumberjack
-            {% endblock %}
-        </title>
-        {% stylesheets '@bootstrap_css' %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/bootstrap.css') }}"/>
-        {% endstylesheets %}
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}
+            HackinLumberjack
+        {% endblock %}
+    </title>
+    {% stylesheets '@bootstrap_css' %}
+    {#<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/bootstrap.css') }}"/> #}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/bootstrap.edit.min.css') }}"/>
+    {% endstylesheets %}
 
-        {% block page_css %}
-        {% endblock page_css %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('hackin_icon.png') }}" />
-    </head>
+    <style>
+    </style>
 
-    <body>
-    {% block navbar %}
-            <nav class="navbar navbar-inverse navigation">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ path('BloggerBlogBundle_homepage') }}">HakinLumberjack</a>
-                    </div>
-                    {% block navbar_options %}
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ path('BloggerBlogBundle_about') }}">About</a></li>
-                            <li><a href="{{ path('BloggerBlogBundle_contact') }}">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            {% if app.user %}
-                                <li><a href="{{ path('BloggerAdminBundle_admin') }}">Admin</a></li>
-                                <li><a href="{{ path('fos_user_security_logout') }}">Sign out</a></li>
-                            {% else %}
-                                <li><a href="{{ path('fos_user_security_login') }}">Sign in</a></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    {% endblock %}
+    {% block page_css %}
+    {% endblock page_css %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('hackin_icon.png') }}" />
+</head>
+
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('BloggerBlogBundle_homepage') }}">HakinLumberjack</a>
+            </div>
+            {% block navbar_options %}
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ path('BloggerBlogBundle_about') }}">About</a></li>
+                        <li><a href="{{ path('BloggerBlogBundle_contact') }}">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li><a href="{{ path('BloggerAdminBundle_admin') }}">Admin</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Sign out</a></li>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">Sign in</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
-            </nav>
-    {% endblock %}
+            {% endblock %}
+        </div>
+    </nav>
+{% endblock %}
 
-    <div class="container-fluid">
-        {% block body %}
-        {% endblock body %}
-    </div>
+<div class="container-fluid">
+    {% block body %}
+    {% endblock body %}
+</div>
 
-        {% javascripts '@jquery' '@bootstrap_js' %}
-    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    {% endjavascripts %}
+{% javascripts '@jquery' '@bootstrap_js' %}
+<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endjavascripts %}
 
-    {% block page_javascript %}
-    {% endblock page_javascript %}
+{% block page_javascript %}
+{% endblock page_javascript %}
 
-    </body>
+</body>
 </html>
