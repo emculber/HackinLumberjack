@@ -2,6 +2,7 @@
 
 namespace Blogger\BlogBundle\Controller;
 
+use Blogger\BlogBundle\Dao\BlogDao;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Enquiry;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +14,10 @@ class PageController extends Controller
         $em = $this->getDoctrine()
             ->getEntityManager();
 
-        $blogs = $em->getRepository('BloggerBlogBundle:Blog')
-            ->getPublishedLatestBlogs();
+        $blogDao = new BlogDao($em);
 
         return $this->render('BloggerBlogBundle:Page:index.html.twig', array(
-            'blogs' => $blogs
+            'blogs' => $blogDao->getBlogs($published=true)
         ));
     }
 

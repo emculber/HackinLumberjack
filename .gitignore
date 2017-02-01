@@ -17,5 +17,5 @@
 .idea
 .idea/*
 web/*
-composer.lock
+composer.phar
 src/FOS

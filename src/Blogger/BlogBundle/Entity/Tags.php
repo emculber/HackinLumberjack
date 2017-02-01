@@ -7,11 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tags
  *
- * @ORM\Table(name="tags", indexes={@ORM\Index(name="IDX_6FBC9426DAE07E97", columns={"blog_id"})})
+ * @ORM\Table(name="tags", indexes={@ORM\Index(name="idx_6fbc9426dae07e97", columns={"blog_id"})})
  * @ORM\Entity
  */
 class Tags
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="tags_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
     /**
      * @var string
      *
@@ -20,19 +30,9 @@ class Tags
     private $tag;
 
     /**
-     * @var integer
+     * @var \Blog
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="tags_id_seq", allocationSize=1, initialValue=1)
-     */
-    private $id;
-
-    /**
-     * @var \Blogger\BlogBundle\Entity\Blog
-     *
-     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\Blog", inversedBy="tags")
+     * @ORM\ManyToOne(targetEntity="Blog")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="blog_id", referencedColumnName="id")
      * })
@@ -40,6 +40,16 @@ class Tags
     private $blog;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set tag
@@ -63,16 +73,6 @@ class Tags
     public function getTag()
     {
         return $this->tag;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

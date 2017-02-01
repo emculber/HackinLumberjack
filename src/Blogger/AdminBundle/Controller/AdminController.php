@@ -16,7 +16,17 @@ class AdminController extends Controller
             ->getEntityManager();
 
         $blogs = $em->getRepository('BloggerBlogBundle:Blog')
-            ->getAllLatestBlogs();
+            ->createQueryBuilder('b')
+            ->select('b')
+            ->addOrderBy('b.created', 'DESC');
+
+        $limit = null;
+        if (false === is_null($limit))
+            $blogs->setMaxResults($limit);
+
+        $blogs = $blogs->getQuery()
+            ->getResult();
+
         return $this->render('BloggerAdminBundle:Admin:index.html.twig', array(
             'blogs' => $blogs
         ));

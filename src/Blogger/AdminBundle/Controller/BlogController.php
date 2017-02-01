@@ -41,7 +41,7 @@ class BlogController extends Controller
 
             $blog = new Blog();
             $blog->setTitle($title);
-            $blog->setAuthor($user);
+            $blog->setAuthorUser($user);
             $blog->setRawBlog($raw_blog);
             $blog->setBlog($parsed_blog);
             $blog->setPublished($publish);

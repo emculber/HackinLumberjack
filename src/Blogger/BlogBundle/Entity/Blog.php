@@ -7,25 +7,27 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Blog
  *
- * @ORM\Table(name="blog")
- * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Entity\Repository\BlogRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="blog", indexes={@ORM\Index(name="IDX_C0155143E2544CD6", columns={"author_user_id"})})
+ * @ORM\Entity
  */
 class Blog
 {
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="title", type="string", length=100, nullable=true)
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="blog_id_seq", allocationSize=1, initialValue=1)
      */
-    private $title;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=100, nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    private $author;
+    private $title;
 
     /**
      * @var string
@@ -70,52 +72,25 @@ class Blog
     private $publishedTime;
 
     /**
-     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Tags", mappedBy="blog", cascade={"remove"})
-     */
-    protected $tags;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Category", mappedBy="blog", cascade={"remove"})
-     */
-    protected $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\SubCategory", mappedBy="blog", cascade={"remove"})
-     */
-    protected $sub_category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Contributers", mappedBy="blog", cascade={"remove"})
-     */
-    protected $contributers;
-
-    /**
-     * @var integer
+     * @var \Users
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="blog_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author_user_id", referencedColumnName="id")
+     * })
      */
-    private $id;
+    private $authorUser;
 
-    public function __construct()
-    {
-        $this->setCreated(new \DateTime());
-        $this->setUpdated(new \DateTime());
-    }
+
 
     /**
-     * @ORM\PreUpdate
+     * Get id
+     *
+     * @return integer
      */
-    public function setUpdatedValue()
+    public function getId()
     {
-       $this->setUpdated(new \DateTime());
-    }
-
-    public function __toString()
-    {
-        return $this->getTitle();
+        return $this->id;
     }
 
     /**
@@ -140,30 +115,6 @@ class Blog
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Blog
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -271,9 +222,6 @@ class Blog
      */
     public function setPublished($published)
     {
-        if(!$this->published && $published) {
-            $this->setPublishedTime(new \DateTime());
-        }
         $this->published = $published;
 
         return $this;
@@ -314,148 +262,26 @@ class Blog
     }
 
     /**
-     * Get id
+     * Set authorUser
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \Blogger\BlogBundle\Entity\Tags $tag
+     * @param \Blogger\BlogBundle\Entity\Users $authorUser
      *
      * @return Blog
      */
-    public function addTag(\Blogger\BlogBundle\Entity\Tags $tag)
+    public function setAuthorUser(\Blogger\BlogBundle\Entity\Users $authorUser = null)
     {
-        $this->tags[] = $tag;
+        $this->authorUser = $authorUser;
 
         return $this;
     }
 
     /**
-     * Remove tag
+     * Get authorUser
      *
-     * @param \Blogger\BlogBundle\Entity\Tags $tag
+     * @return \Blogger\BlogBundle\Entity\Users
      */
-    public function removeTag(\Blogger\BlogBundle\Entity\Tags $tag)
+    public function getAuthorUser()
     {
-        $this->tags->removeElement($tag);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Add category
-     *
-     * @param \Blogger\BlogBundle\Entity\Category $category
-     *
-     * @return Blog
-     */
-    public function addCategory(\Blogger\BlogBundle\Entity\Category $category)
-    {
-        $this->category[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Blogger\BlogBundle\Entity\Category $category
-     */
-    public function removeCategory(\Blogger\BlogBundle\Entity\Category $category)
-    {
-        $this->category->removeElement($category);
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Add subCategory
-     *
-     * @param \Blogger\BlogBundle\Entity\SubCategory $subCategory
-     *
-     * @return Blog
-     */
-    public function addSubCategory(\Blogger\BlogBundle\Entity\SubCategory $subCategory)
-    {
-        $this->sub_category[] = $subCategory;
-
-        return $this;
-    }
-
-    /**
-     * Remove subCategory
-     *
-     * @param \Blogger\BlogBundle\Entity\SubCategory $subCategory
-     */
-    public function removeSubCategory(\Blogger\BlogBundle\Entity\SubCategory $subCategory)
-    {
-        $this->sub_category->removeElement($subCategory);
-    }
-
-    /**
-     * Get subCategory
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSubCategory()
-    {
-        return $this->sub_category;
-    }
-
-    /**
-     * Add contributer
-     *
-     * @param \Blogger\BlogBundle\Entity\Contributers $contributer
-     *
-     * @return Blog
-     */
-    public function addContributer(\Blogger\BlogBundle\Entity\Contributers $contributer)
-    {
-        $this->contributers[] = $contributer;
-
-        return $this;
-    }
-
-    /**
-     * Remove contributer
-     *
-     * @param \Blogger\BlogBundle\Entity\Contributers $contributer
-     */
-    public function removeContributer(\Blogger\BlogBundle\Entity\Contributers $contributer)
-    {
-        $this->contributers->removeElement($contributer);
-    }
-
-    /**
-     * Get contributers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContributers()
-    {
-        return $this->contributers;
+        return $this->authorUser;
     }
 }

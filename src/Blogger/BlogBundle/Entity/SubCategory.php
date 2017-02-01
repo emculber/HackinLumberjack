@@ -7,11 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SubCategory
  *
- * @ORM\Table(name="sub_category", indexes={@ORM\Index(name="IDX_BCE3F798DAE07E97", columns={"blog_id"})})
+ * @ORM\Table(name="sub_category", indexes={@ORM\Index(name="IDX_BCE3F798DAE07E97", columns={"blog_id"}), @ORM\Index(name="IDX_BCE3F79812469DE2", columns={"category_id"})})
  * @ORM\Entity
  */
 class SubCategory
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="sub_category_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
     /**
      * @var string
      *
@@ -20,26 +30,36 @@ class SubCategory
     private $subCategory;
 
     /**
-     * @var integer
+     * @var \Blog
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="sub_category_id_seq", allocationSize=1, initialValue=1)
-     */
-    private $id;
-
-    /**
-     * @var \Blogger\BlogBundle\Entity\Blog
-     *
-     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\Blog", inversedBy="sub_category")
+     * @ORM\ManyToOne(targetEntity="Blog")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="blog_id", referencedColumnName="id")
      * })
      */
     private $blog;
 
+    /**
+     * @var \Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
+     */
+    private $category;
 
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set subCategory
@@ -66,16 +86,6 @@ class SubCategory
     }
 
     /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Set blog
      *
      * @param \Blogger\BlogBundle\Entity\Blog $blog
@@ -97,5 +107,29 @@ class SubCategory
     public function getBlog()
     {
         return $this->blog;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Blogger\BlogBundle\Entity\Category $category
+     *
+     * @return SubCategory
+     */
+    public function setCategory(\Blogger\BlogBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Blogger\BlogBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

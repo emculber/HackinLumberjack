@@ -7,29 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Contributers
  *
- * @ORM\Table(name="contributers", indexes={@ORM\Index(name="IDX_7F45E7B4DAE07E97", columns={"blog_id"})})
+ * @ORM\Table(name="contributers", indexes={@ORM\Index(name="IDX_7F45E7B4DAE07E97", columns={"blog_id"}), @ORM\Index(name="IDX_7F45E7B4758383F6", columns={"contributer_user_id"})})
  * @ORM\Entity
  */
 class Contributers
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="contributer", type="string", length=100, nullable=true)
-     */
-    private $contributer;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="time", type="datetime", nullable=true)
-     */
-    private $time;
-
-    /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="contributers_id_seq", allocationSize=1, initialValue=1)
@@ -37,64 +23,33 @@ class Contributers
     private $id;
 
     /**
-     * @var \Blogger\BlogBundle\Entity\Blog
+     * @var \DateTime
      *
-     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\Blog", inversedBy="contributers")
+     * @ORM\Column(name="contribute_time", type="datetime", nullable=true)
+     */
+    private $contributeTime;
+
+    /**
+     * @var \Blog
+     *
+     * @ORM\ManyToOne(targetEntity="Blog")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="blog_id", referencedColumnName="id")
      * })
      */
     private $blog;
 
-
-
     /**
-     * Set contributer
+     * @var \Users
      *
-     * @param string $contributer
-     *
-     * @return Contributers
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="contributer_user_id", referencedColumnName="id")
+     * })
      */
-    public function setContributer($contributer)
-    {
-        $this->contributer = $contributer;
+    private $contributerUser;
 
-        return $this;
-    }
 
-    /**
-     * Get contributer
-     *
-     * @return string
-     */
-    public function getContributer()
-    {
-        return $this->contributer;
-    }
-
-    /**
-     * Set time
-     *
-     * @param \DateTime $time
-     *
-     * @return Contributers
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    /**
-     * Get time
-     *
-     * @return \DateTime
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
 
     /**
      * Get id
@@ -104,6 +59,30 @@ class Contributers
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set contributeTime
+     *
+     * @param \DateTime $contributeTime
+     *
+     * @return Contributers
+     */
+    public function setContributeTime($contributeTime)
+    {
+        $this->contributeTime = $contributeTime;
+
+        return $this;
+    }
+
+    /**
+     * Get contributeTime
+     *
+     * @return \DateTime
+     */
+    public function getContributeTime()
+    {
+        return $this->contributeTime;
     }
 
     /**
@@ -128,5 +107,29 @@ class Contributers
     public function getBlog()
     {
         return $this->blog;
+    }
+
+    /**
+     * Set contributerUser
+     *
+     * @param \Blogger\BlogBundle\Entity\Users $contributerUser
+     *
+     * @return Contributers
+     */
+    public function setContributerUser(\Blogger\BlogBundle\Entity\Users $contributerUser = null)
+    {
+        $this->contributerUser = $contributerUser;
+
+        return $this;
+    }
+
+    /**
+     * Get contributerUser
+     *
+     * @return \Blogger\BlogBundle\Entity\Users
+     */
+    public function getContributerUser()
+    {
+        return $this->contributerUser;
     }
 }
