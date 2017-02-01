@@ -13,14 +13,13 @@ class BlogDao
         $this->em = $em;
     }
 
-    public function getBlogs($limit=null, $published=null)
+    public function getBlogs($published=false, $limit=null)
     {
         $blogs = $this->em->getRepository('BloggerBlogBundle:Blog')
             ->createQueryBuilder('b')
             ->select('b');
 
-
-        if (false === is_null($published)) {
+        if ($published) {
             $blogs->where('b.published = TRUE');
         }
 

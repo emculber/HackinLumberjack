@@ -2,6 +2,7 @@
 
 namespace Blogger\AdminBundle\Controller;
 
+use Blogger\BlogBundle\Dao\BlogDao;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -15,20 +16,10 @@ class AdminController extends Controller
         $em = $this->getDoctrine()
             ->getEntityManager();
 
-        $blogs = $em->getRepository('BloggerBlogBundle:Blog')
-            ->createQueryBuilder('b')
-            ->select('b')
-            ->addOrderBy('b.created', 'DESC');
-
-        $limit = null;
-        if (false === is_null($limit))
-            $blogs->setMaxResults($limit);
-
-        $blogs = $blogs->getQuery()
-            ->getResult();
+        $blogDao = new BlogDao($em);
 
         return $this->render('BloggerAdminBundle:Admin:index.html.twig', array(
-            'blogs' => $blogs
+            'blogs' => $blogDao->getBlogs()
         ));
     }
 

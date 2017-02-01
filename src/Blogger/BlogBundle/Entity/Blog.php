@@ -81,7 +81,11 @@ class Blog
      */
     private $authorUser;
 
-
+    public function __construct()
+    {
+        $this->setCreated(new \DateTime());
+        $this->setUpdated(new \DateTime());
+    }
 
     /**
      * Get id
@@ -222,6 +226,10 @@ class Blog
      */
     public function setPublished($published)
     {
+         if(!$this->published && $published) {
+            $this->setPublishedTime(new \DateTime());
+        }
+
         $this->published = $published;
 
         return $this;

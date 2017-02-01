@@ -17,7 +17,7 @@ class PageController extends Controller
         $blogDao = new BlogDao($em);
 
         return $this->render('BloggerBlogBundle:Page:index.html.twig', array(
-            'blogs' => $blogDao->getBlogs($published=true)
+            'blogs' => $blogDao->getBlogs(true)
         ));
     }
 
