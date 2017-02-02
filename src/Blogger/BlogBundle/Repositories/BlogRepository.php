@@ -1,22 +1,14 @@
 <?php
 
-namespace Blogger\BlogBundle\Dao;
+namespace Blogger\BlogBundle\Repositories;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
-class BlogDao
+class BlogRepository extends EntityRepository
 {
-    protected $em;
-
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
     public function getBlogs($published=false, $limit=null)
     {
-        $blogs = $this->em->getRepository('BloggerBlogBundle:Blog')
-            ->createQueryBuilder('b')
+        $blogs = $this->createQueryBuilder('b')
             ->select('b');
 
         if ($published) {

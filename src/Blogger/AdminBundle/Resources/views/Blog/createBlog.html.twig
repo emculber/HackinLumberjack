@@ -8,7 +8,7 @@
         <h1>HackinLumberjack Creates the best blogs. So Create one!</h1>
     </header>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 blog_edit_panel">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">New Blog:</h3>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 blog_preview_panel">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Preview:</h3>
@@ -48,6 +48,8 @@
         <div class="col-md-2">
             <p>Options:</p>
             <div class="checkbox">
+                <label><input id="maximize_preview" type="checkbox" value="">Maximize Preview</label>
+                <label><input id="maximize_editor" type="checkbox" value="">Maximize Editor</label>
                 <label><input id="live_preview" type="checkbox" value="">Live Preview</label>
                 {% if blog.published is defined %}
                     <label><input id="publish_blog" type="checkbox" {{ blog.published ? "checked":'' }}>Publish Blog</label>
@@ -63,6 +65,21 @@
 
     {% block page_javascript %}
            <script>
+               $("#maximize_editor").change(function() {
+                   if(this.checked) {
+                       $(".blog_edit_panel").removeClass('col-md-5').addClass('col-md-12');
+                   }else {
+                       $(".blog_edit_panel").removeClass('col-md-12').addClass('col-md-5');
+                   }
+               });
+               $("#maximize_preview").change(function() {
+                   if(this.checked) {
+                       $(".blog_preview_panel").removeClass('col-md-5').addClass('col-md-12');
+                   }else {
+                       $(".blog_preview_panel").removeClass('col-md-12').addClass('col-md-5');
+                   }
+               });
+
             $("#new_blog").keyup(function() {
                 console.log("New Blog Clicked");
                 if($('#live_preview').is(':checked')) {

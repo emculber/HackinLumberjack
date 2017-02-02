@@ -2,7 +2,7 @@
 
 namespace Blogger\AdminBundle\Controller;
 
-use Blogger\BlogBundle\Dao\BlogDao;
+use Blogger\BlogBundle\Repositories\BlogRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -13,13 +13,11 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()
-            ->getEntityManager();
-
-        $blogDao = new BlogDao($em);
+        $blog = $this->getDoctrine()
+        ->getEntityManager()->getRepository('BloggerBlogBundle:Blog')->getBlogs();
 
         return $this->render('BloggerAdminBundle:Admin:index.html.twig', array(
-            'blogs' => $blogDao->getBlogs()
+            'blogs' => $blog
         ));
     }
 
